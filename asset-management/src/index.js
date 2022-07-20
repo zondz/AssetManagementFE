@@ -1,14 +1,61 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-import App from './App';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from './pages/homepage/HomePage';
 import reportWebVitals from './reportWebVitals';
-
+import Layout from './layouts/Layout';
+import Intro from './components/intro/Intro';
+import RequireAuth from './pages/requireAuth/RequireAuth';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <BrowserRouter>
+  <Routes>
+    <Route path="/" >
+      <Route index element={
+        <RequireAuth>
+          <Layout>
+            <HomePage/>
+          </Layout>
+        </RequireAuth>
+      
+      } ></Route>
+
+      <Route path="user">
+        <Route index ></Route>
+        <Route path="create"></Route>
+        <Route path="edit"></Route>
+
+      </Route>
+      <Route path="asset">
+      <Route index ></Route>
+      <Route path="create"></Route>
+      <Route path="edit"></Route>
+
+      </Route>
+      <Route path="assignment">
+      <Route index ></Route>
+      <Route path="create"></Route>
+      <Route path="edit"></Route>
+
+
+      </Route>
+      <Route path="RequestForReturning">
+      <Route index ></Route>
+
+
+
+
+      </Route>
+      <Route path="report">
+      <Route index ></Route>
+
+
+      </Route>
+
+
+    </Route>
+  </Routes>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
