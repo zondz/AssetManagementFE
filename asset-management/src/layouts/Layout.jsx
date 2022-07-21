@@ -5,14 +5,15 @@ import Sidebar from "../components/sidebar/Sidebar";
 
 function Layout({children}){
     // check if user is admin or staff to render correct Sidebar
-    const [state,setState] = 'temp'
+    const [user,setUser] = 'temp'
     // console.log("user role : ",state.role)
 
     return (
         <>
         <Navbar />
-        <Sidebar role={state.role}/>
         <Intro/>
+        <Sidebar role={user.role}/>
+        
         {children}
         
         </>

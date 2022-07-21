@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import Layout from './layouts/Layout';
 import Intro from './components/intro/Intro';
 import RequireAuth from './pages/requireAuth/RequireAuth';
+import LoginPage from './pages/login/LoginPage';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
@@ -21,7 +22,8 @@ root.render(
       } ></Route>
 
       <Route path="user">
-        <Route index ></Route>
+        <Route index >
+      </Route>
         <Route path="create"></Route>
         <Route path="edit"></Route>
 
@@ -54,6 +56,7 @@ root.render(
 
 
     </Route>
+    <Route path="/login" element={<LoginPage/>}/>
   </Routes>
   </BrowserRouter>
 );
