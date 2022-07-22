@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthProvider } from "./context/AuthProvider";
 import UnauthorizedPage from "./pages/unauthorized/UnauthorizedPage";
+import { ROLE } from "./util/enum";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -31,7 +32,7 @@ pauseOnHover
 <AuthProvider>
     <Routes>
       <Route path="/">
-        <Route   element={  <RequireAuth allowedRoles={["STAFF","ADMIN"]}></RequireAuth>}>
+        <Route   element={  <RequireAuth allowedRoles={[ROLE.ADMIN,ROLE.STAFF]}></RequireAuth>}>
          <Route index element={<Layout><HomePage /></Layout>}/>
         </Route>
 

@@ -6,6 +6,7 @@ export const CONFIG={
 }
 
 export const END_POINT={
+    login : '/authenticate'
 
 
 }

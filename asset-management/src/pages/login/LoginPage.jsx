@@ -1,12 +1,14 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Form, Input, Button } from "antd";
+import { Button, Form, Input } from "antd";
 import "antd/dist/antd.min.css";
-import { useRef, useState } from "react";
-import "./login.css";
-import {  toast,ToastContainer } from 'react-toastify';
-import { authenticate } from "../../services";
-import useAuth from "../../hooks/useAuth";
+import jwt from 'jwt-decode'; // import dependency
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import useAuth from "../../hooks/useAuth";
+import { authenticate } from "../../services";
+import "./login.css";
+
 function LoginPage() {
   const [login, setLogin] = useState({
     username: "",
@@ -26,36 +28,46 @@ function LoginPage() {
 
   // console.log("state : ",login)
 
-  const onFinish = async (value) => {
-    console.log("value ", value);
+  const onFinish = async (user) => {
     
     try {
-        // const response = await authenticate(value)
+        const response = await authenticate(user);
+
+        const respondedUser = jwt(response.data.jwtToken)
+        console.log("return user ",respondedUser)
+
+
 
         setUser({
-            username : 'sample',
-            type : 'ADMIN'
+            username : respondedUser.sub,
+            type : respondedUser.role[0].authority
         })
+        localStorage.setItem('token',response.data.jwtToken)
+
         navigate("/")
         
         // console.log("response : ",response)
     } catch (error) {
-        console.log("error : ",error)
+        if(error.response.data.status===401){
+            console.log("401 error ",error)
+            toast.error(`${error.response.data.message}`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+        }
     }
 
 
-    toast.error('🦄 Wow so easy!', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        });
+  
   };
 
   return (
+    
     <section className="login-page">
       <h1>Login</h1>
       <Form onFinish={onFinish} className="login-form">

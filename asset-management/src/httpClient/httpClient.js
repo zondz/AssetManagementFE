@@ -6,13 +6,13 @@ const postUser = (endPoint,data)=>{
    })}
 
 
-const authenticate = (endPoint,data)=>{
+const login = (endPoint,data)=>{
     return instance.post(endPoint,data)
 }
 
 const  httpClient = {
     postUser,
-    authenticate
+    login
     
 }
 
