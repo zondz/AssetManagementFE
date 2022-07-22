@@ -5,6 +5,8 @@ import {Navigate, Outlet, useLocation} from 'react-router-dom'
 
 function RequireAuth({allowedRoles}){
 
+    console.log("allowed roles ",allowedRoles)
+
     const {user,setUser} = useAuth()
     const location = useLocation();
     console.log("Require auth user : ",user)

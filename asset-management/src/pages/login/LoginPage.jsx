@@ -5,12 +5,17 @@ import { useRef, useState } from "react";
 import "./login.css";
 import {  toast,ToastContainer } from 'react-toastify';
 import { authenticate } from "../../services";
-
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 function LoginPage() {
   const [login, setLogin] = useState({
     username: "",
     password: "",
   });
+
+  const {user,setUser} = useAuth();
+  const navigate = useNavigate();
+
 
   const handleChange = (event) => {
     setLogin({
@@ -25,8 +30,15 @@ function LoginPage() {
     console.log("value ", value);
     
     try {
-        const response = await authenticate(value)
-        console.log("response : ",response)
+        // const response = await authenticate(value)
+
+        setUser({
+            username : 'sample',
+            type : 'ADMIN'
+        })
+        navigate("/")
+        
+        // console.log("response : ",response)
     } catch (error) {
         console.log("error : ",error)
     }

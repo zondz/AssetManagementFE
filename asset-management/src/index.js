@@ -31,7 +31,7 @@ pauseOnHover
 <AuthProvider>
     <Routes>
       <Route path="/">
-        <Route   element={  <RequireAuth allowedRoles={["STAFF,ADMIN"]}></RequireAuth>}>
+        <Route   element={  <RequireAuth allowedRoles={["STAFF","ADMIN"]}></RequireAuth>}>
          <Route index element={<Layout><HomePage /></Layout>}/>
         </Route>
 
