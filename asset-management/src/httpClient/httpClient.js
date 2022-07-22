@@ -1,4 +1,4 @@
-
+import instance from "./axiosInstance";
 
 const postUser = (endPoint,data)=>{
    return instance.post(endPoint,data,{
@@ -8,9 +8,7 @@ const postUser = (endPoint,data)=>{
 
 
 const  httpClient = {
-    get,
-    postUser,
-    authenticate
+    postUser
     
 }
 

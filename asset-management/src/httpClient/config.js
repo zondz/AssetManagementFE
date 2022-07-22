@@ -6,11 +6,6 @@ export const CONFIG={
 }
 
 export const END_POINT={
-    /**
-     *  createNewPost:'/posts/',
-     *  authenticate:'/authenticate'
-     * 
-     * 
-     */
+
 
 }
