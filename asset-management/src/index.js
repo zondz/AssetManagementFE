@@ -9,6 +9,8 @@ import RequireAuth from "./pages/requireAuth/RequireAuth";
 import LoginPage from "./pages/login/LoginPage";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthProvider } from "./context/AuthProvider";
+import UnauthorizedPage from "./pages/unauthorized/UnauthorizedPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -26,18 +28,12 @@ pauseOnHover
 />
 {/* Same as */}
 <ToastContainer />
+<AuthProvider>
     <Routes>
       <Route path="/">
-        <Route
-          index
-          element={
-            <RequireAuth>
-              <Layout>
-                <HomePage />
-              </Layout>
-            </RequireAuth>
-          }
-        ></Route>
+        <Route   element={  <RequireAuth allowedRoles={["STAFF,ADMIN"]}></RequireAuth>}>
+         <Route index element={<Layout><HomePage /></Layout>}/>
+        </Route>
 
         <Route path="user">
           <Route index></Route>
@@ -62,7 +58,10 @@ pauseOnHover
         </Route>
       </Route>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/unauthorized" element={<UnauthorizedPage/>}/>
+
     </Routes>
+    </AuthProvider>
   </BrowserRouter>
 );
 

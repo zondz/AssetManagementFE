@@ -26,8 +26,9 @@ function LoginPage() {
     
     try {
         const response = await authenticate(value)
+        console.log("response : ",response)
     } catch (error) {
-        
+        console.log("error : ",error)
     }
 
 

@@ -6,7 +6,7 @@ import Sidebar from "../components/sidebar/Sidebar";
 function Layout({children}){
     // check if user is admin or staff to render correct Sidebar
     const [user,setUser] = 'temp'
-    // console.log("user role : ",state.role)
+    console.log("user role : ")
 
     return (
         <>
