@@ -1,35 +1,46 @@
+import jwt from 'jwt-decode';
 import Navbar from "../components/navbar/Navbar";
-
-import Intro from "../components/intro/Intro";
 import Sidebar from "../components/sidebar/Sidebar";
 import useAuth from "../hooks/useAuth";
-import jwt from 'jwt-decode'
+import { ADMIN_SIDEBAR, ROLE, STAFF_SIDEBAR } from "../util/enum";
+import './layout.css';
 
-function Layout({children}){
-    // check if user is admin or staff to render correct Sidebar
+
+function Layout({title,children}){
+    // console.log("layout props" ,props)
     const {user} = useAuth();
     const localToken = localStorage.getItem('token');
     let userFromToken = jwt(localToken);
     let role = null;
+    let username = null;
 
     console.log("layout user : ",user)
     console.log("layout user from token: ",userFromToken)
 
     if(user){
         role = user.type
+        username = user.sub
     }else if(userFromToken){
         role = userFromToken.role[0].authority
+        username = userFromToken.sub
+
     }
 
     return (
-        <>
-        <Navbar />
-        <Intro/>
-        <Sidebar role={role}/>
-        
+        <section>
+        <Navbar title={title} username={username} />
+        {/* <Intro/> */}
+        <div className="page-wrapper">
+        <Sidebar renderContent={role===ROLE.ADMIN?ADMIN_SIDEBAR:STAFF_SIDEBAR}/>
+     
+        <div style={{display : 'inline-block' ,marginLeft:'30px',marginTop:'30px'}}>
         {children}
+
+        </div>
         
-        </>
+        </div>
+        
+        </section>
     )
 
 
