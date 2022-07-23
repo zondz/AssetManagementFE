@@ -12,18 +12,15 @@ function Layout({title,children}){
     const localToken = localStorage.getItem('token');
     let userFromToken = null;
     if(localToken){
-        console.log("token valid")
         userFromToken = jwt(localToken);
     }
     let role = null;
     let username = null;
 
-    console.log("layout user : ",user)
-    console.log("layout user from token: ",userFromToken)
-
     if(user){
         role = user.type
-        username = user.sub
+        username = user.username
+
     }else if(userFromToken){
         role = userFromToken.role[0].authority
         username = userFromToken.sub
@@ -33,7 +30,6 @@ function Layout({title,children}){
     return (
         <section>
         <Navbar title={title} username={username} />
-        {/* <Intro/> */}
         <div className="page-wrapper">
         <Sidebar renderContent={role===ROLE.ADMIN?ADMIN_SIDEBAR:STAFF_SIDEBAR}/>
      
