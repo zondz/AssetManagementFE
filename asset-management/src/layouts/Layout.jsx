@@ -10,7 +10,11 @@ function Layout({title,children}){
     // console.log("layout props" ,props)
     const {user} = useAuth();
     const localToken = localStorage.getItem('token');
-    let userFromToken = jwt(localToken);
+    let userFromToken = null;
+    if(localToken){
+        console.log("token valid")
+        userFromToken = jwt(localToken);
+    }
     let role = null;
     let username = null;
 
