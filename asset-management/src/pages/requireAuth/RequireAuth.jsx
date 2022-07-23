@@ -4,14 +4,18 @@ import useAuth from "../../hooks/useAuth";
 
 function RequireAuth({allowedRoles}){
 
-    console.log("allowed roles ",allowedRoles)
 
     const {user,setUser} = useAuth()
     const location = useLocation();
-    console.log("Require auth user : ",user)
+    console.log("user from context : ",user)
     const tokenFromLocalStorage = localStorage.getItem("token")
-    const userFromToken = jwt(tokenFromLocalStorage);
-    if((!user) &&!userFromToken.sub){
+    console.log("token from storage ",tokenFromLocalStorage);
+    const userFromToken = null;
+    if(tokenFromLocalStorage){
+        userFromToken = jwt(tokenFromLocalStorage);
+    }
+    
+    if((!user) &&userFromToken===null){
         console.log("user not logged in")
 
        return <Navigate to={"/login"}  replace/>

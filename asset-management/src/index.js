@@ -31,6 +31,7 @@ root.render(
     <AuthProvider>
       <Routes>
         <Route path="/">
+          
           <Route
             element={
               <RequireAuth
