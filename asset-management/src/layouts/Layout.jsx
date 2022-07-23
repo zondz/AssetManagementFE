@@ -1,4 +1,3 @@
-import jwt from 'jwt-decode';
 import Navbar from "../components/navbar/Navbar";
 import Sidebar from "../components/sidebar/Sidebar";
 import useAuth from "../hooks/useAuth";
@@ -7,25 +6,10 @@ import './layout.css';
 
 
 function Layout({title,children}){
-    // console.log("layout props" ,props)
     const {user} = useAuth();
-    const localToken = localStorage.getItem('token');
-    let userFromToken = null;
-    if(localToken){
-        userFromToken = jwt(localToken);
-    }
-    let role = null;
-    let username = null;
-
-    if(user){
-        role = user.type
-        username = user.username
-
-    }else if(userFromToken){
-        role = userFromToken.role[0].authority
-        username = userFromToken.sub
-
-    }
+   
+    let role = user.role[0].authority;
+    let username = user.sub;
 
     return (
         <section>

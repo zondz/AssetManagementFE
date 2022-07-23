@@ -1,7 +1,6 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import "antd/dist/antd.min.css";
-import jwt from 'jwt-decode'; // import dependency
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -15,7 +14,7 @@ function LoginPage() {
     password: "",
   });
 
-  const {user,setUser} = useAuth();
+  const {setToken} = useAuth();
   const navigate = useNavigate();
 
 
@@ -33,23 +32,15 @@ function LoginPage() {
     try {
         const response = await authenticate(user);
 
-        const respondedUser = jwt(response.data.jwtToken)
-        console.log("return user ",respondedUser)
+        // const respondedUser = jwt(response.data.jwtToken)
 
-
-
-        setUser({
-            username : respondedUser.sub,
-            type : respondedUser.role[0].authority
-        })
+        setToken(response.data.jwtToken)
         localStorage.setItem('token',response.data.jwtToken)
 
         navigate("/")
         
-        // console.log("response : ",response)
     } catch (error) {
         if(error.response.data.status===401){
-            console.log("401 error ",error)
             toast.error(`${error.response.data.message}`, {
                 position: "top-right",
                 autoClose: 5000,

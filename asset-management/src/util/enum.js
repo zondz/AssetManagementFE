@@ -3,7 +3,7 @@ export const ROLE = {
   STAFF: "STAFF",
 };
 
-export const STAFF_SIDEBAR = ["Home"];
+export const STAFF_SIDEBAR = [{content : "Home",route:"/"}];
 
 export const ADMIN_SIDEBAR = [
   { content: "Home", route: "/" },
