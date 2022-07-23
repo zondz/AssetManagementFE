@@ -25,14 +25,12 @@ function LoginPage() {
     });
   };
 
-  // console.log("state : ",login)
 
   const onFinish = async (user) => {
     
     try {
         const response = await authenticate(user);
 
-        // const respondedUser = jwt(response.data.jwtToken)
 
         setToken(response.data.jwtToken)
         localStorage.setItem('token',response.data.jwtToken)
@@ -40,8 +38,8 @@ function LoginPage() {
         navigate("/")
         
     } catch (error) {
-        if(error.response.data.status===401){
-            toast.error(`${error.response.data.message}`, {
+        if(error?.response?.data?.status===401){
+            toast.error(`${error?.response?.data?.message}`, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -52,7 +50,9 @@ function LoginPage() {
                 });
         }
         else{
-            toast.error(`${error.response.data.message}`, {
+
+            toast.error(`Internal server error !!`, {
+              
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
