@@ -4,11 +4,6 @@
     box-sizing: border-box;
 }
 
-html {
-    font-family: 'Nunito', sans-serif;
-    font-size: 22px;
-    color: #fff;
-}
 
 .center-button{
     display: flex;
