@@ -1,0 +1,20 @@
+.container-fluid-custom{
+    padding-right: 80px;
+    /* color: whitesmoke; */
+}
+
+.navbar-brand-custom{
+    color: whitesmoke;
+}
+.support-content{
+    color: whitesmoke;
+
+}
+
+.toggle-custom{
+    color: whitesmoke !important;
+
+}
+.toggle-custom:hover{
+    color: white;
+}
